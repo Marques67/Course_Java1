@@ -48,18 +48,21 @@ public class Account_Exception {
 	}
 	
 	public void deposit (Double amount) {
-		amount += getBalance();
+		balance += amount;
 	}
 	
-	public void withdraw (Double amount) {
+	public void withdraw(double amount) {
+		validateWithdraw(amount);
+		balance -= amount;
+	}
+	
+	private void validateWithdraw (double amount) {
 		if(getBalance() == 0.0 || amount > getBalance()) {
 			throw new AccountException("Not enough balance");
 		}
 		if(amount > withdrawLimit) {
 			throw new AccountException("The amount exceeds withdraw limit");
 		}
-		double balance = getBalance() - amount;
-		System.out.printf("New Balance: $ %.2f%n", balance);
 	}
 	
 }
